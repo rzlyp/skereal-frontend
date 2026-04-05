@@ -30,8 +30,54 @@ const DashboardPage = () => {
           <p className="text-blue-100 mb-6 max-w-md">
             Transform your fashion sketches into photorealistic images — in under 2 minutes.
           </p>
+          <Link
+            to="/dress-maker"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#2563EB]
+              font-semibold rounded-lg hover:bg-blue-50 transition-colors text-sm"
+          >
+            <PlusIcon className="w-4 h-4" />
+            New Project
+          </Link>
         </div>
       </div>
+
+      <section>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-[#1E293B]">Recent Projects</h2>
+          <Link
+            to="/dress-maker"
+            className="text-sm text-[#2563EB] hover:underline font-medium"
+          >
+            View all →
+          </Link>
+        </div>
+
+        {isLoading ? (
+          <SkeletonGalleryGrid count={4} />
+        ) : projects.length === 0 ? (
+          <div className="bg-white rounded-xl border border-dashed border-slate-300 p-12 text-center">
+            <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mx-auto mb-4">
+              <ImageIcon className="w-6 h-6 text-[#2563EB]" />
+            </div>
+            <p className="text-[#1E293B] font-medium mb-1">No projects yet</p>
+            <p className="text-[#64748B] text-sm mb-4">Create your first fashion design</p>
+            <Link
+              to="/dress-maker"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#2563EB] text-white
+                rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+            >
+              <PlusIcon className="w-4 h-4" />
+              Create Project
+            </Link>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        )}
+      </section>
     </div>
   );
 };
