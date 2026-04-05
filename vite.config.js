@@ -8,7 +8,9 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     server: {
+      host: true, 
       port: 5173,
+      allowedHosts: ['app.skereal.online'], 
       proxy: {
         '/api': {
           target: backendUrl,
@@ -20,7 +22,8 @@ export default defineConfig(({ mode }) => {
         },
         '/socket.io': {
           target: backendUrl,
-          ws: true
+          ws: true,
+          changeOrigin: true
         }
       }
     }
