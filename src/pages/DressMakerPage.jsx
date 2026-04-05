@@ -48,7 +48,7 @@ const DressMakerPage = () => {
     }
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     onDrop,
     accept: { 'image/*': ['.jpeg', '.jpg', '.png', '.webp'] },
     maxSize: 10 * 1024 * 1024,
@@ -203,14 +203,11 @@ const DressMakerPage = () => {
                     alt="Sketch preview"
                     className="w-full h-full object-contain"
                   />
-                  <div
-                    {...getRootProps()}
-                    className="absolute bottom-2 right-2"
-                    onClick={(e) => e.stopPropagation()}
-                  >
+                  <div className="absolute bottom-2 right-2">
                     <input {...getInputProps()} />
                     <button
                       type="button"
+                      onClick={(e) => { e.stopPropagation(); open(); }}
                       className="text-xs px-3 py-1.5 bg-white/90 text-[#64748B] rounded-lg
                         border border-slate-200 hover:bg-white hover:text-[#1E293B] transition-colors"
                     >
