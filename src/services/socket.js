@@ -7,7 +7,7 @@ export const connectSocket = (userId) => {
     return socket;
   }
 
-  socket = io('/', {
+  socket = io(import.meta.env.VITE_API_URL ?? '/', {
     transports: ['websocket', 'polling']
   });
 
